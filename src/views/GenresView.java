@@ -17,6 +17,7 @@ public class GenresView {
 
     }
 
+
     public void inputGenre(Genre model) {
         System.out.println("Input genre's name:");
         model.setName(Validator.validateString("Input genre's name:"));
