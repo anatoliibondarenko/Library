@@ -9,9 +9,10 @@ public enum Mode {
 
     public static String getListModes() {
         String result = "[";
-        for (int i = 0; i < Mode.values().length - 1; i++) {
+        int i;
+        for (i = 0; i < Mode.values().length - 1; i++) {
             result += Mode.values()[i].name() + " - " + (i + 1) + ", ";
         }
-        return result += Mode.values()[Mode.values().length - 1].name() + " - 0]";
+        return result += Mode.values()[Mode.values().length - 1].name() + " - " + (i + 1) + "]";
     }
 }

@@ -2,6 +2,7 @@ package utils;
 
 
 import base.Mode;
+import base.Subject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,20 +26,35 @@ public class Validator {
         }
     }
 
+    public static Subject validateSubject() {
+        int choice = getIntNumber();
+        if (choice > 0 && choice <= Subject.values().length) {
+            return Subject.values()[choice - 1];
+        } else {
+            System.out.println("Invalid choice!");
+            return validateSubject();
+        }
+    }
+
     public static Mode validateMode() {
-
-        int mode = getIntNumber("");
-
-        if (mode < 0 || mode >= Mode.values().length ) {
-            getIntNumber("Invalid input!");
+        int choice = getIntNumber();
+        if (choice > 0 && choice <= Mode.values().length) {
+            return Mode.values()[choice - 1];
+        } else {
+            System.out.println("Invalid choice!");
+            return validateMode();
         }
-            try {
-            mode = Integer.parseInt(READER.readLine());
-        } catch (IOException e) {
-            e.printStackTrace();
+    }
+
+    public static int getIntNumber() {
+        try {
+            String str = READER.readLine();
+            return Integer.parseInt(str);
+        } catch (Exception exception) {
+            System.out.println("Error: " + exception.getMessage());
+            return getIntNumber();
         }
 
-        return null;
     }
 
     public static int getIntNumber(String inputMessage) {

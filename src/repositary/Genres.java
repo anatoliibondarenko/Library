@@ -5,9 +5,13 @@ import models.Genre;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Genres implements Serializable {
+    public List<Genre> getGenres() {
+        return genres;
+    }
 
     private final List<Genre> genres = new ArrayList<>();
 
@@ -15,6 +19,7 @@ public class Genres implements Serializable {
     public void add(Genre genre) {
         genres.add(genre);
     }
+
 
     private void writeObject(java.io.ObjectOutputStream out) throws IOException {
 
