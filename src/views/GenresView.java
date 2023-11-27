@@ -4,34 +4,35 @@ import base.Mode;
 import models.Genre;
 import utils.Validator;
 
-import java.io.IOException;
-import java.util.Arrays;
+import java.util.List;
 
 public class GenresView {
 
-    private Genre model;
-
-    public GenresView(Genre model) {
-        this.model = model;
+    public void displayMessage(String message) {
+        System.out.println(message);
     }
 
-    public void selectMode() {
+    public Mode selectMode() {
         System.out.println("Select mode working:");
-        System.out.println(Mode.getListModes() + ":\n");;
-
+        System.out.println(Mode.getListModes() + ":");;
+        return Validator.validateMode();
 
     }
 
-    public void addGenre() {
 
-
+    public void inputGenre(Genre model) {
         System.out.println("Input genre's name:");
         model.setName(Validator.validateString("Input genre's name:"));
 
         System.out.println("Input genre's description:");
         model.setDescription(Validator.validateString("Input genre's description:"));
+    }
 
+    public void displayGenres(String str) {
+        System.out.println(str);
+    }
 
-
+    public int deleteGenre() {
+        return Validator.getIntNumber("Input number of deleted genre");
     }
 }

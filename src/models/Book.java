@@ -1,11 +1,14 @@
 package models;
 
-public class Book {
+import java.io.Serializable;
 
+public class Book implements Serializable {
+
+    private Author author;
     private String name;
-    private String description;
     private int yearPublication;
     private Genre genre;
+    private String description;
 
 
 }

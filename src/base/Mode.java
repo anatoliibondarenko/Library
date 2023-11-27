@@ -2,16 +2,19 @@ package base;
 
 public enum Mode {
     ADD,
-    EDIT,
     DELETE,
     DISPLAY,
     EXIT;
 
     public static String getListModes() {
-        String result = "[";
-        for (int i = 0; i < Mode.values().length - 1; i++) {
-            result += Mode.values()[i].name() + " - " + (i + 1) + ", ";
+        StringBuilder result = new StringBuilder("[");
+        int i;
+        for (i = 0; i < Mode.values().length - 1; i++) {
+            result.append(Mode.values()[i].name())
+                    .append(" - ")
+                    .append(i + 1)
+                    .append(", ");
         }
-        return result += Mode.values()[Mode.values().length - 1].name() + " - 0]";
+        return result + (Mode.values()[Mode.values().length - 1].name() + " - " + (i + 1) + "]");
     }
 }

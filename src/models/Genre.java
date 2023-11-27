@@ -1,6 +1,8 @@
 package models;
 
-public class Genre {
+import java.io.Serializable;
+
+public class Genre implements Serializable{
 
     private String name;
     private String description;
@@ -20,4 +22,5 @@ public class Genre {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }
