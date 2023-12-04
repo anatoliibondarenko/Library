@@ -1,21 +1,24 @@
 package controllers;
 
+import base.Controller;
 import base.Mode;
+import base.Repository;
+import models.Author;
 import models.Genre;
 import repositary.Genres;
+import views.AuthorView;
 import views.GenresView;
 
-// Controller
-public class GenreController {
+public class GenreController implements Controller {
 
-  //  Genre model;
-    GenresView view;
-    Genres repositary = new Genres();
+    private final GenresView view;
+    private final Genres repository;
 
-    public GenreController(GenresView view) {
-      //  this.model = model;
-        this.view = view;
+    public GenreController(Genres repository) {
+        this.view = new GenresView();
+        this.repository = repository;
     }
+
 
     public void start() {
         Mode mode = view.selectMode();
@@ -24,23 +27,34 @@ public class GenreController {
                 case ADD:
                     Genre genre = new Genre();
                     view.inputGenre(genre);
-                    repositary.add(genre);
+                    repository.add(genre);
                     break;
-                case EDIT:
-                    System.out.println(Mode.EDIT);
                 case DELETE:
-                    System.out.println(Mode.DELETE);
-                case DISPLAY:
-                    view.displayAll(repositary.getGenres());
+                    int id;
+                    while (true) {
+                        id = view.deleteGenre();
+                        if (id > 0 && id <= repository.getSize()) {
+                            break;
+                        } else {
+                            view.displayMessage("Invalid number of genre: " + id) ;
+                        }
+                    }
+                    repository.remove(id - 1);
+                    view.displayMessage("Genre "+ id + " was deleted successful.");
+                    break;
+                case DISPLAY: {
+                    String format = "%-20s%s%n";
+                    StringBuilder builder = new StringBuilder(String.format(format, "Genre", "Description"));
+                    for (int i = 0; i < repository.getSize(); i++) {
+                        Genre line = repository.getModel(i);
+                        builder.append(String.format(format, (i + 1) + ". " + line.getName(), line.getDescription()));
+                    }
+                    view.displayGenres(builder.toString());
 
+                }
             }
             mode = view.selectMode();
         }
-//        view.addGenre();
-//        save(model);
     }
 
-    private void save(Genre model) {
-        repositary.add(model);
-    }
 }

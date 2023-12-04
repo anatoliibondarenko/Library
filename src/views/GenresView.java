@@ -4,11 +4,13 @@ import base.Mode;
 import models.Genre;
 import utils.Validator;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 public class GenresView {
+
+    public void displayMessage(String message) {
+        System.out.println(message);
+    }
 
     public Mode selectMode() {
         System.out.println("Select mode working:");
@@ -26,7 +28,11 @@ public class GenresView {
         model.setDescription(Validator.validateString("Input genre's description:"));
     }
 
-    public void displayAll(List<Genre> list) {
-        System.out.println(list.toString());
+    public void displayGenres(String str) {
+        System.out.println(str);
+    }
+
+    public int deleteGenre() {
+        return Validator.getIntNumber("Input number of deleted genre");
     }
 }
