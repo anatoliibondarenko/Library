@@ -18,6 +18,10 @@ public class AuthorController implements Controller {
         this.repository = repository;
     }
 
+    public static Controller getInstance() {
+        
+    }
+
     public void start() {
         Mode mode = view.selectMode();
         while (!mode.equals(Mode.EXIT)) {

@@ -40,7 +40,7 @@ public class GenreController implements Controller {
                         }
                     }
                     repository.remove(id - 1);
-                    view.displayMessage("Genre "+ (id - 1) + " was deleted successful.");
+                    view.displayMessage("Genre "+ id + " was deleted successful.");
                     break;
                 case DISPLAY: {
                     String format = "%-20s%s%n";

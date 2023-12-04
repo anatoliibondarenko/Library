@@ -7,10 +7,13 @@ import base.Subject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.Year;
+import java.util.Calendar;
 
 public class Validator {
 
     public static final BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
+    public static final int MIN_YEAR_PUBLICATION = 1900;
 
     public static String validateString(String message) {
         String str;
@@ -68,6 +71,17 @@ public class Validator {
         }
     }
 
+    public static int validateYearPublication() {
+        int year;
+        while (true) {
+            year = getIntNumber("Input year of publication (must be greater than " + MIN_YEAR_PUBLICATION);
+            if (year >= MIN_YEAR_PUBLICATION  && year <= Year.now().getValue()) {
+                return year;
+            } else {
+                System.out.println("Invalid year: " + year);
+            }
+        }
+    }
 }
 
 

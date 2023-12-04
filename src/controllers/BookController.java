@@ -14,13 +14,13 @@ import views.BookView;
 public class BookController implements Controller {
 
     private final BookView view;
-    private final Books repository;
+    private final Books books;
     private final Authors authors;
     private final Genres genres;
 
     public BookController(Books repository, Authors authors, Genres genres) {
         view = new BookView();
-        this.repository = repository;
+        this.books = repository;
         this.authors = authors;
         this.genres = genres;
     }
@@ -30,38 +30,38 @@ public class BookController implements Controller {
         while (!mode.equals(Mode.EXIT)) {
             switch (mode) {
                 case ADD:
-                    view.displayMessage("Chose number of book's author");
-                   // authors.
                     Book book = new Book();
-                    view.addModel(book);
-                    repository.add(book);
+
+                    view.displayMessage("Chose author (input the number):");
+                    book.setAuthor(selectAuthor());
+
+                    view.inputName(book);
+                    view.inputYearPublication();
+
+                    view.displayMessage("Chose number of book's genre");
+                    book.setGenre(selectGenre());
+
+                    book.setDescription(view.inputDescription(book));
+
+                    books.add(book);
                     break;
 
                 case DELETE:
                     int id;
                     while (true) {
                         id = view.deleteModel();
-                        if (id > 0 && id <= repository.getSize()) {
+                        if (id > 0 && id <= books.getSize()) {
                             break;
                         } else {
                             view.displayMessage("Invalid number of genre: " + id);
                         }
                     }
-                    repository.remove(id - 1);
-                    view.displayMessage("Author "+ (id - 1) + " was deleted successful.");
+                    books.remove(id - 1);
+                    view.displayMessage("Author " + (id - 1) + " was deleted successful.");
                     break;
 
                 case DISPLAY: {
-//
-//                    StringBuilder builder = new StringBuilder("Authors\n");
-//                    for (int i = 0; i < repository.getSize(); i++) {
-//                        Author author1 = repository.getModel(i);
-//                        builder.append(i + 1).append(". ")
-//                                .append(author1.getName()).append(" ")
-//                                .append(author1.getLastName()).append("\n");
-//                    }
-//                    view.displayModels(builder.toString());
-
+                    view.displayMessage(books.displayAll());
                 }
 
             }
@@ -69,5 +69,28 @@ public class BookController implements Controller {
         }
     }
 
+    private Genre selectGenre() {
+        view.displayMessage(genres.displayAll());
+        int id = selectNumber(genres);
+        return genres.getModel(id - 1);
 
+    }
+
+    private Author selectAuthor() {
+        view.displayMessage(authors.displayAll());
+        int id = selectNumber(authors);
+        return authors.getModel(id - 1);
+    }
+
+    private int selectNumber(Repository repository) {
+        int id;
+        while (true) {
+            id = view.makeChoice("Input number ");
+            if (id > 0 && id <= repository.getSize()) {
+                return id;
+            } else {
+                view.displayMessage("Invalid number: " + id);
+            }
+        }
+    }
 }

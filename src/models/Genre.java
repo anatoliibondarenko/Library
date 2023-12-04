@@ -23,4 +23,8 @@ public class Genre implements Serializable{
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return name + " " + description;
+    }
 }

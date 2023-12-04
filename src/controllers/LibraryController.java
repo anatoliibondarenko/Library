@@ -21,28 +21,33 @@ public class LibraryController {
     LibraryView view = new LibraryView();
 
     public void start() {
+
         loadLibraryFromFile();
 
         Subject subject = view.selectSubject();
         Controller controller = null;
         while (!subject.equals(Subject.EXIT)) {
-            switch (subject) {
-                case AUTHORS:
-                    controller = new AuthorController(authors);
-                    break;
-                case BOOKS:
-                    controller = new BookController(books, authors, genres);
-                    break;
-                case GENRES:
-                    controller = new GenreController(genres);
-                    break;
-               }
-
+            controller = selectController(subject, controller);
             controller.start();
             subject = view.selectSubject();
         }
 
         saveLibraryToFile();
+    }
+
+    private Controller selectController(Subject subject, Controller controller) {
+        switch (subject) {
+            case AUTHORS:
+                controller = AuthorController.getInstance();
+                break;
+            case BOOKS:
+                controller = new BookController(books, authors, genres);
+                break;
+            case GENRES:
+                controller = new GenreController(genres);
+                break;
+           }
+        return controller;
     }
 
     private void loadLibraryFromFile() {

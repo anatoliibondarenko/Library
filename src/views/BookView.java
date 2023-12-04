@@ -1,7 +1,6 @@
 package views;
 
 import base.Mode;
-import models.Author;
 import models.Book;
 import utils.Validator;
 
@@ -36,9 +35,25 @@ public class BookView {
         return Validator.getIntNumber("Input number of deleted genre");
     }
 
+    public int makeChoice(String message) {
+        return Validator.getIntNumber(message);
+    }
+
     public void addModel(Book book) {
 
 
     }
 
+    public void inputName(Book book) {
+        // System.out.println("Input book's name:");
+        book.setName(Validator.validateString("Input book's name:"));
+    }
+
+    public int inputYearPublication() {
+        return Validator.validateYearPublication();
+    }
+
+    public String inputDescription() {
+
+    }
 }
