@@ -13,7 +13,8 @@ public class BookView {
 
     public Mode selectMode() {
         System.out.println("Select mode working:");
-        System.out.println(Mode.getListModes() + ":");;
+        System.out.println(Mode.getListModes() + ":");
+        ;
         return Validator.validateMode();
 
     }
@@ -44,16 +45,16 @@ public class BookView {
 
     }
 
-    public void inputName(Book book) {
-        // System.out.println("Input book's name:");
-        book.setName(Validator.validateString("Input book's name:"));
+    public String inputName() {
+        return Validator.validateString("Input book's name:");
     }
 
     public int inputYearPublication() {
         return Validator.validateYearPublication();
     }
 
-    public String inputDescription() {
 
+    public String inputDescription(Book book) {
+        return Validator.validateString("Input book`s description:");
     }
 }

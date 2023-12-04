@@ -12,17 +12,18 @@ import repositary.Genres;
 import views.BookView;
 
 public class BookController implements Controller {
+    public static final BookController INSTANCE = new BookController();
 
     private final BookView view;
     private final Books books;
     private final Authors authors;
     private final Genres genres;
 
-    public BookController(Books repository, Authors authors, Genres genres) {
+    public BookController() {
         view = new BookView();
-        this.books = repository;
-        this.authors = authors;
-        this.genres = genres;
+        books = LibraryController.books;
+        authors = LibraryController.authors;
+        genres = LibraryController.genres;
     }
 
     public void start() {
@@ -35,8 +36,8 @@ public class BookController implements Controller {
                     view.displayMessage("Chose author (input the number):");
                     book.setAuthor(selectAuthor());
 
-                    view.inputName(book);
-                    view.inputYearPublication();
+                    book.setName(view.inputName());
+                    book.setYearPublication(view.inputYearPublication());
 
                     view.displayMessage("Chose number of book's genre");
                     book.setGenre(selectGenre());

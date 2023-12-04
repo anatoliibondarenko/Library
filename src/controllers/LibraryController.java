@@ -2,49 +2,44 @@ package controllers;
 
 import base.Controller;
 import base.Subject;
-import models.Book;
 import repositary.Authors;
 import repositary.Books;
 import repositary.Genres;
-import views.GenresView;
 import views.LibraryView;
 
 import java.io.*;
 
 public class LibraryController {
-    private Genres genres;
-    private Authors authors;
-    private Books books;
+    public static Genres genres;
+    public static Authors authors;
+    public static Books books;
 
+    private LibraryView view = new LibraryView();
     private final File LIBRARY_DATA = new File("library.txt");
 
-    LibraryView view = new LibraryView();
-
     public void start() {
-
         loadLibraryFromFile();
 
         Subject subject = view.selectSubject();
-        Controller controller = null;
         while (!subject.equals(Subject.EXIT)) {
-            controller = selectController(subject, controller);
-            controller.start();
+            selectController(subject).start();
             subject = view.selectSubject();
         }
 
         saveLibraryToFile();
     }
 
-    private Controller selectController(Subject subject, Controller controller) {
+    private Controller selectController(Subject subject) {
+        Controller controller = null;
         switch (subject) {
             case AUTHORS:
-                controller = AuthorController.getInstance();
+                controller = AuthorController.INSTANCE;
                 break;
             case BOOKS:
-                controller = new BookController(books, authors, genres);
+                controller = BookController.INSTANCE;
                 break;
             case GENRES:
-                controller = new GenreController(genres);
+                controller = GenreController.INSTANCE;
                 break;
            }
         return controller;

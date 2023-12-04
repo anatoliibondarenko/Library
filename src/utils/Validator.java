@@ -16,6 +16,7 @@ public class Validator {
     public static final int MIN_YEAR_PUBLICATION = 1900;
 
     public static String validateString(String message) {
+        System.out.println(message);
         String str;
         while (true) {
             try {
