@@ -1,6 +1,7 @@
 package models;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Genre implements Serializable{
 
@@ -24,7 +25,21 @@ public class Genre implements Serializable{
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Genre)) return false;
+        Genre genre = (Genre) o;
+        return Objects.equals(name, genre.name) &&
+                Objects.equals(description, genre.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description);
+    }
+
+    @Override
     public String toString() {
-        return name + " " + description;
+        return "Name: " + name + ", description: " + description;
     }
 }

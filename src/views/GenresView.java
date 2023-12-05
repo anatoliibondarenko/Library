@@ -21,10 +21,10 @@ public class GenresView {
 
 
     public void inputGenre(Genre model) {
-        System.out.println("Input genre's name:");
+        //System.out.println("Input genre's name:");
         model.setName(Validator.validateString("Input genre's name:"));
 
-        System.out.println("Input genre's description:");
+       // System.out.println("Input genre's description:");
         model.setDescription(Validator.validateString("Input genre's description:"));
     }
 
@@ -34,5 +34,10 @@ public class GenresView {
 
     public int deleteGenre() {
         return Validator.getIntNumber("Input number of deleted genre");
+    }
+
+    public boolean isNeedRemoveLinkedBooks(Genre genre) {
+        displayMessage("Library has books with selected genres.");
+        return Validator.getYesOrNo("Remove books - input (Y), fill removing genre of books by NULL - input (N).");
     }
 }

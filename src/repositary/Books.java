@@ -5,8 +5,24 @@ import models.Book;
 import models.Genre;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Books extends Repository<Book> implements Serializable {
-  }
+
+    public void remove(Genre genre) {
+        int size = getSize();
+        for (int i = 0; i < size; i++) {
+            if (getModel(i).getGenre().equals(genre)) {
+                remove(i);
+                size--;
+            }
+        }
+    }
+
+    public void setNulls(Genre genre) {
+        for (int i = 0; i < getSize(); i++) {
+            if (getModel(i).getGenre().equals(genre)) {
+                getModel(i).setGenre(null);
+            }
+        }
+    }
+}

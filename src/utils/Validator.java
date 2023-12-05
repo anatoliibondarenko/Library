@@ -83,6 +83,22 @@ public class Validator {
             }
         }
     }
+
+    public static boolean getYesOrNo(String message) {
+        System.out.println(message);
+        String str;
+        while (true) {
+            try {
+                str = READER.readLine().trim().toUpperCase();
+                if (str.equals("Y") || str.equals("N")) {
+                    return str.equals("Y");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Invalid input: " + message);
+        }
+    }
 }
 
 

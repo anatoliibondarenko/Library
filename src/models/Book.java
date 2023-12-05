@@ -52,12 +52,10 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "Book{" +
-                "author=" + author +
-                ", name='" + name + '\'' +
-                ", yearPublication=" + yearPublication +
-                ", genre=" + genre +
-                ", description='" + description + '\'' +
-                '}';
+        return  "Author = [" + author +
+                "], book's name = " + name +
+                ", year of publication = " + yearPublication +
+                ", genre = [" + genre +
+                "], book's description = " + description;
     }
 }

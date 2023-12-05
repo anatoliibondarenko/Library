@@ -32,6 +32,6 @@ public class Author implements Serializable {
 
     @Override
     public String toString() {
-        return  name + " " + lastName + ", count of books - " + listBooks.size() ;
+        return  "Name: " + name + ", lastname: " + lastName;
     }
 }

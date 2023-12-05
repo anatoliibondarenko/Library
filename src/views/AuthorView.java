@@ -25,10 +25,10 @@ public class AuthorView {
     }
 
     public void addModel(Author model) {
-        System.out.println("Input author's name:");
+      //  System.out.println("Input author's name:");
         model.setName(Validator.validateString("Input author's name:"));
 
-        System.out.println("Input author's lastname:");
+    //    System.out.println("Input author's lastname:");
         model.setLastName(Validator.validateString("Input author's lastname:"));
     }
 }

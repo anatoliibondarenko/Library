@@ -33,7 +33,7 @@ public class BookView {
     }
 
     public int deleteModel() {
-        return Validator.getIntNumber("Input number of deleted genre");
+        return Validator.getIntNumber("Input number of deleted book");
     }
 
     public int makeChoice(String message) {

@@ -29,10 +29,18 @@ public abstract class Repository<E> implements RepositoryCapable<E>, Serializabl
     }
 
     public String displayAll() {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < getSize(); i++) {
-            builder.append(i + 1).append(". ").append(getModel(i).toString()).append("\n");
+        String string;
+        if (getSize() > 0) {
+            StringBuilder builder = new StringBuilder();
+            int i;
+            for (i = 0; i < getSize() - 1; i++) {
+                builder.append(i + 1).append(". ").append(getModel(i).toString()).append("\n");
+            }
+            builder.append(i + 1).append(". ").append(getModel(i).toString());
+            string = builder.toString();
+        } else {
+            string = "Nothing to display.";
         }
-        return builder.toString();
+        return string;
     }
 }

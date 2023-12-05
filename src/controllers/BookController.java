@@ -54,11 +54,11 @@ public class BookController implements Controller {
                         if (id > 0 && id <= books.getSize()) {
                             break;
                         } else {
-                            view.displayMessage("Invalid number of genre: " + id);
+                            view.displayMessage("Invalid number of book: " + id);
                         }
                     }
                     books.remove(id - 1);
-                    view.displayMessage("Author " + (id - 1) + " was deleted successful.");
+                    view.displayMessage("Book " + id + " was deleted successful.");
                     break;
 
                 case DISPLAY: {

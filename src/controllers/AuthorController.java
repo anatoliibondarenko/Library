@@ -3,6 +3,7 @@ package controllers;
 import base.Controller;
 import base.Mode;
 import models.Author;
+import models.Genre;
 import repositary.Authors;
 import views.AuthorView;
 
@@ -38,14 +39,29 @@ public class AuthorController implements Controller {
     }
 
     private void displayAuthors() {
-        StringBuilder builder = new StringBuilder("Authors\n");
-        for (int i = 0; i < repository.getSize(); i++) {
-            Author author1 = repository.getModel(i);
-            builder.append(i + 1).append(". ")
-                    .append(author1.getName()).append(" ")
-                    .append(author1.getLastName()).append("\n");
+        String str;
+        if (repository.getSize() > 0) {
+            StringBuilder builder = new StringBuilder("Authors\n");
+            builder.append(repository.displayAll());
+//            int i;
+//            Author author;
+//            for (i = 0; i < repository.getSize() - 1; i++) {
+//                author = repository.getModel(i);
+//                builder.append(i + 1).append(". ")
+//                        .append(author.getName()).append(" ")
+//                        .append(author.getLastName()).append("\n");
+//            }
+//            author = repository.getModel(i);
+//            builder.append(i + 1).append(". ")
+//                    .append(author.getName()).append(" ")
+//                    .append(author.getLastName());
+
+            str = builder.toString();
+        } else {
+            str = "Nothing to display.";
         }
-        view.displayModels(builder.toString());
+
+        view.displayMessage(str);
     }
 
     private void deleteAuthor() {
