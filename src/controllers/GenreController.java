@@ -1,13 +1,12 @@
 package controllers;
 
 import base.Controller;
-import base.Mode;
 import models.Genre;
 import repositary.Books;
 import repositary.Genres;
 import views.GenresView;
 
-public class GenreController implements Controller {
+public class GenreController extends Controller {
 
     public static final GenreController INSTANCE = new GenreController();
 
@@ -21,45 +20,31 @@ public class GenreController implements Controller {
         books = LibraryController.books;
     }
 
-    public void start() {
-        Mode mode = view.selectMode();
-        while (!mode.equals(Mode.EXIT)) {
-            makeConcreteWork(mode);
-            mode = view.selectMode();
-        }
-    }
-
-    private void makeConcreteWork(Mode mode) {
-        switch (mode) {
-            case ADD:
-                addGenre();
-                break;
-            case DELETE:
-                removeGenre();
-                break;
-            case DISPLAY: {
-                displayGenres();
-            }
-        }
-    }
-
-    private void addGenre() {
+    public void add() {
         Genre genre = new Genre();
         view.inputGenre(genre);
         repository.add(genre);
+        view.displayMessage("Genre " + genre.toString() + " was added.");
     }
 
-    private void removeGenre() {
-        int numberDeletedGenre = getNumberDeletedGenre();
-        verifyLinkedBooks(numberDeletedGenre);
+    public void remove() {
+        int numberDeletedGenre = view.getChoiceNumber("Input number of deleted genre", repository.getSize());
+        processLinkedBooks(numberDeletedGenre);
         repository.remove(numberDeletedGenre - 1);
         view.displayMessage("Genre " + numberDeletedGenre + " was deleted successful.");
     }
 
-    private void verifyLinkedBooks(int numberDeletedGenre) {
+    public void display() {
+        if (repository.getSize() > 0) {
+            view.displayMessage("Genres: ");
+        }
+        view.displayMessage(repository.displayAll());
+    }
+
+    private void processLinkedBooks(int numberDeletedGenre) {
         Genre genre = repository.getModel(numberDeletedGenre - 1);
         if (countBooksByGenre(genre) > 0) {
-            if (view.isNeedRemoveLinkedBooks(genre)) {
+            if (view.isNeedRemoveLinkedBooks()) {
                 books.remove(genre);
             } else {
                 books.setNulls(genre);
@@ -70,45 +55,10 @@ public class GenreController implements Controller {
     private int countBooksByGenre(Genre genre) {
         int count = 0;
         for (int i = 0; i < books.getSize(); i++) {
-            if (books.getModel(i).getGenre().equals(genre)) {
+            if (books.getModel(i).getGenre() != null && books.getModel(i).getGenre().equals(genre)) {
                 count++;
             }
         }
         return count;
-    }
-
-    private int getNumberDeletedGenre() {
-        int id;
-        while (true) {
-            id = view.deleteGenre();
-            if (id > 0 && id <= repository.getSize()) {
-                break;
-            } else {
-                view.displayMessage("Invalid number of genre: " + id);
-            }
-        }
-        return id;
-    }
-
-    public void displayGenres() {
-        String str;
-        if (repository.getSize() > 0) {
-            StringBuilder builder = new StringBuilder("Genres\n");
-            builder.append(repository.displayAll());
-//            String format = "%-20s%s%n";
-//            StringBuilder builder = new StringBuilder(String.format(format, "Genre", "Description"));
-//            int i = 0;
-//            for (i = 0; i < repository.getSize() - 1; i++) {
-//                Genre line = repository.getModel(i);
-//                builder.append(String.format(format, (i + 1) + ". " + line.getName(), line.getDescription()));
-//            }
-//            format = "%-20s%s";
-//            Genre line = repository.getModel(i);
-//            builder.append(String.format(format, (i + 1) + ". " + line.getName(), line.getDescription()));
-            str = builder.toString();
-        } else {
-            str = "Nothing to display.";
-        }
-        view.displayGenres(str);
     }
 }

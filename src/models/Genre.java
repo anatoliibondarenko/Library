@@ -3,21 +3,13 @@ package models;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Genre implements Serializable{
+public class Genre implements Serializable {
 
     private String name;
     private String description;
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public void setDescription(String description) {
@@ -40,6 +32,7 @@ public class Genre implements Serializable{
 
     @Override
     public String toString() {
-        return "Name: " + name + ", description: " + description;
+        return "Name: " + "'" + name + "'" +
+                ", description: " + "'" + description + "'";
     }
 }

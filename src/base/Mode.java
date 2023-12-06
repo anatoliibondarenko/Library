@@ -2,7 +2,7 @@ package base;
 
 public enum Mode {
     ADD,
-    DELETE,
+    REMOVE,
     DISPLAY,
     EXIT;
 

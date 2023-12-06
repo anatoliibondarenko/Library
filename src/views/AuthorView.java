@@ -1,34 +1,22 @@
 package views;
 
-import base.Mode;
+import base.ModelView;
 import models.Author;
 import utils.Validator;
 
-public class AuthorView {
+public class AuthorView extends ModelView {
 
     public void displayMessage(String message) {
         System.out.println(message);
     }
 
-    public Mode selectMode() {
-        System.out.println("Select mode working:");
-        System.out.println(Mode.getListModes() + ":");;
-        return Validator.validateMode();
-    }
-
-    public void displayModels(String str) {
-        displayMessage(str);
-    }
-
-    public int deleteModel() {
-        return Validator.getIntNumber("Input number of author to delete ");
-    }
-
     public void addModel(Author model) {
-      //  System.out.println("Input author's name:");
         model.setName(Validator.validateString("Input author's name:"));
-
-    //    System.out.println("Input author's lastname:");
         model.setLastName(Validator.validateString("Input author's lastname:"));
+    }
+
+    public boolean isNeedRemoveLinkedBooks() {
+        displayMessage("Library has books with selected author. Books will be removed too.");
+        return Validator.getYesOrNo("Remove author - input (Y), discard removing  - input (N).");
     }
 }

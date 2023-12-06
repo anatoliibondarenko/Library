@@ -18,16 +18,8 @@ public class Book implements Serializable {
         this.author = author;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getYearPublication() {
-        return yearPublication;
     }
 
     public void setYearPublication(int yearPublication) {
@@ -42,20 +34,16 @@ public class Book implements Serializable {
         this.genre = genre;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
     @Override
     public String toString() {
-        return  "Author = [" + author +
-                "], book's name = " + name +
-                ", year of publication = " + yearPublication +
+        return "Author = [" + author +
+                "], book's name = " + "'" + name + "'" +
+                ", year of publication = " + "'" + yearPublication + "'" +
                 ", genre = [" + genre +
-                "], book's description = " + description;
+                "], book's description = " + "'" + description + "'";
     }
 }

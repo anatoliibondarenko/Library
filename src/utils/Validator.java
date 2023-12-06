@@ -1,6 +1,5 @@
 package utils;
 
-
 import base.Mode;
 import base.Subject;
 
@@ -8,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.Year;
-import java.util.Calendar;
 
 public class Validator {
 
@@ -76,7 +74,7 @@ public class Validator {
         int year;
         while (true) {
             year = getIntNumber("Input year of publication (must be greater than " + MIN_YEAR_PUBLICATION);
-            if (year >= MIN_YEAR_PUBLICATION  && year <= Year.now().getValue()) {
+            if (year >= MIN_YEAR_PUBLICATION && year <= Year.now().getValue()) {
                 return year;
             } else {
                 System.out.println("Invalid year: " + year);
@@ -98,6 +96,19 @@ public class Validator {
             }
             System.out.println("Invalid input: " + message);
         }
+    }
+
+    public static int getIntNumber(String message, int maxValue) {
+        int number;
+        while (true) {
+            number = getIntNumber(message);
+            if (number > 0 && number <= maxValue) {
+                break;
+            } else {
+                System.out.println("Invalid input: " + number);
+            }
+        }
+        return number;
     }
 }
 
