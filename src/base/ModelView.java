@@ -1,7 +1,7 @@
 package base;
 
 import utils.Validator;
-
+//
 public abstract class ModelView {
 
     public void displayMessage(String message) {
